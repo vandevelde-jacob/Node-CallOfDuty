@@ -217,10 +217,10 @@ module.exports = function (config = {}) {
                 const page = await browser.newPage();
                 await page.setDefaultNavigationTimeout(120000);
                 await page.goto('https://profile.callofduty.com/cod/login')
-            
+
                 await page.type('#username', username, { delay: 100 });
                 await page.type('#password', password, { delay: 100 });
-            
+
                 await page.solveRecaptchas();
 
                 await Promise.all([
@@ -260,6 +260,7 @@ module.exports = function (config = {}) {
                 let authHeader = response.data.authHeader;
                 apiAxios.defaults.headers.common.Authorization = `bearer ${authHeader}`;
                 apiAxios.defaults.headers.common.x_cod_device_id = `${deviceId}`;
+                apiAxios.defaults.headers.common["Atvi-auth"] = `${sso}`;
                 let fakeXSRF = "68e8b62e-1d9d-4ce1-b93f-cbe5ff31a041";
                 ssoCookie = `ACT_SSO_COOKIE=${sso};XSRF-TOKEN=${fakeXSRF};API_CSRF_TOKEN=${fakeXSRF};`;
                 console.log(ssoCookie);
