@@ -230,9 +230,9 @@ module.exports = function (config = {}) {
 
                 const cookies = await page.cookies();
                 const auth = {
-                  xsrf: cookies.find(c => c.name === 'XSRF-TOKEN')?.value,
-                  sso: cookies.find(c => c.name === 'ACT_SSO_COOKIE')?.value,
-                  atkn: cookies.find(c => c.name === 'atkn')?.value,
+                  xsrf: cookies.find(c => c.name === 'XSRF-TOKEN') ? cookies.find(c => c.name === 'XSRF-TOKEN').value : undefined,
+                  sso: cookies.find(c => c.name === 'ACT_SSO_COOKIE') ? cookies.find(c => c.name === 'ACT_SSO_COOKIE').value : undefined,
+                  atkn: cookies.find(c => c.name === 'atkn') ? cookies.find(c => c.name === 'atkn').value : undefined,
                 }
                 await browser.close();
 
